@@ -1,0 +1,43 @@
+.page {
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .projectsList {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .noProjects {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .projectList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .projectItem {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .projectTitle {
+    font-size: 1.5rem;
+    color: #007bff;
+  }
+  
+  .projectDescription {
+    font-size: 1rem;
+    color: #666;
+  }
+  
