@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './components/styles/Projects.module.css';
+import styles from '../styles/Projects.module.css';
 
 interface Project {
   id: number;

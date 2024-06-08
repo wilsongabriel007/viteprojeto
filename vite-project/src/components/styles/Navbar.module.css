@@ -1,24 +1,25 @@
 .navbar {
   display: flex;
-  justify-content: center;
-  background-color: #333;
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
+  background-color: #333;
+  color: #fff;
 }
 
 .link {
-  color: white;
+  display: flex;  /* Adiciona flex para alinhar a imagem e o texto */
+  align-items: center;  /* Centraliza verticalmente */
   text-decoration: none;
-  margin: 0 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.link:hover {
-  background-color: #555;
+  color: #fff;
 }
 
 .active {
-  background-color: #007bff;
-  border-radius: 5px;
+  font-weight: bold;
+}
+
+.logo {
+  width: 40px; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  margin-right: 0.5rem; /* Espaçamento entre a imagem e o texto */
 }
