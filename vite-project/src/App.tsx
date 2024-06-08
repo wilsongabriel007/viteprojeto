@@ -10,17 +10,20 @@ import styles from './components/styles/App.module.css';
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router>     
       <div className={styles.container}>
-        <Navbar />
+        <Navbar />  
         <div className={styles.content}>
+          
           <Routes>
+              
             <Route path="/" element={<Home />} />
             <Route path="/company" element={<Company />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/newproject" element={<NewProject />} />
             <Route path="/projects" element={<Projects />} />
           </Routes>
+          
         </div>
       </div>
     </Router>

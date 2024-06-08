@@ -1,3 +1,15 @@
+.logo{
+  display: flex;
+  justify-content: flex-start; /* Move a Navbar para a direita */
+  padding: 1rem;
+}
+.navbar-container {
+  display: flex;
+  justify-content: flex-end; /* Move a Navbar para a direita */
+  padding: 1rem;
+  background-color: #333;
+}
+
 .navbar {
   display: flex;
   align-items: center;
