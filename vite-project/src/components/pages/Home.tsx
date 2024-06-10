@@ -8,7 +8,7 @@ const Home: React.FC = () => {
     <div className={styles.page}>
       <h1 className={styles.title}>Bem-vindo ao <span className={styles.span}>Cost box!</span></h1>
       <p className={styles.p1}>Comece a gerenciar agora mesmo!</p>
-      <a className={styles.link} href='/'>Criar Projeto</a>
+      <a className={styles.link} href='NewProject'>Criar Projeto</a>
       <img className={styles.savings} src={savings} alt="Home"/>
 
       

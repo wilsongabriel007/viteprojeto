@@ -6,6 +6,7 @@ import Company from './components/pages/Company';
 import Contact from './components/pages/Contact';
 import NewProject from './components/pages/NewProject';
 import Projects from './components/pages/Projects';
+import Footer from './components/pages/Footer';
 import styles from './components/styles/App.module.css';
 
 const App: React.FC = () => {
@@ -25,6 +26,7 @@ const App: React.FC = () => {
           </Routes>
           
         </div>
+        <Footer />
       </div>
     </Router>
   );
