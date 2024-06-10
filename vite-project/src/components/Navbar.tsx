@@ -10,12 +10,8 @@ const Navbar: React.FC = () => {
     <div className={styles['navbar-container']}>  
       <nav className={styles.navbar}>
         
-        <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : styles.link)}>
-       
-          
-          Home
-
-        </NavLink>
+        <img src={logo} alt="logo" className={styles.logo} />
+        <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : styles.link)}>Home</NavLink>
         <NavLink to="/company" className={({ isActive }) => (isActive ? styles.active : styles.link)}>Empresa</NavLink>
         <NavLink to="/contact" className={({ isActive }) => (isActive ? styles.active : styles.link)}>Contato</NavLink>
         <NavLink to="/projects" className={({ isActive }) => (isActive ? styles.active : styles.link)}>Projetos</NavLink>

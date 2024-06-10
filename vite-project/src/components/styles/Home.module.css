@@ -1,0 +1,66 @@
+.home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    padding: 4em;
+  }
+  
+  .savings {
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: auto;
+    margin: 20px 0;
+    
+  }
+  .link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title{
+    font-size: 2.5em;
+    margin-bottom: .5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .span{
+    color: red;
+    padding: 0 .2em;
+  }
+
+
+
+  .p1{
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #7b7b7b;
+
+
+  }
+  
+  .createProjectButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .createProjectButton:hover {
+    background-color: #0056b3;
+  }
+  
