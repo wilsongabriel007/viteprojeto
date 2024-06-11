@@ -1,49 +1,69 @@
-import React, { useState } from 'react';
-import styles from '../styles/Page.module.css';
+import React, { useState, useContext } from 'react';
+import { ProjectContext } from '../../components/context/ProjectContext';
+import styles from '../styles/NewProject.module.css';
+
 
 const NewProject: React.FC = () => {
-  const [title, setTitle] = useState('');
+  const projectContext = useContext(ProjectContext);
+
+  // Verifique se o contexto não é undefined
+  if (!projectContext) {
+    throw new Error('useContext(ProjectContext) must be used within a ProjectProvider');
+  }
+
+  const { addProject } = projectContext;
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [budget, setBudget] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newProject = { id: Date.now(), title, description };
-
-    const storedProjects = localStorage.getItem('projects');
-    const projects = storedProjects ? JSON.parse(storedProjects) : [];
-    projects.push(newProject);
-
-    localStorage.setItem('projects', JSON.stringify(projects));
-    alert(`Projeto criado: ${title}, ${description}`);
-    setTitle('');
+    const newProject = {
+      id: Date.now(),
+      name,
+      description,
+      budget,
+    };
+    addProject(newProject);
+    setName('');
     setDescription('');
+    setBudget(0);
   };
 
   return (
-    <div className={styles.page}>
-      <h1 className={styles.title}>Novo Projeto</h1>
+    <div className={styles.newProject}>
+      <h1>Criar Novo Projeto</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="title">Título</label>
+          <label htmlFor="name">Nome do Projeto:</label>
           <input
             type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="description">Descrição</label>
+          <label htmlFor="description">Descrição:</label>
           <textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            rows={5}
             required
-          ></textarea>
+          />
         </div>
-        <button type="submit" className={styles.button}>Criar Projeto</button>
+        <div className={styles.formGroup}>
+          <label htmlFor="budget">Orçamento:</label>
+          <input
+            type="number"
+            id="budget"
+            value={budget}
+            onChange={(e) => setBudget(Number(e.target.value))}
+            required
+          />
+        </div>
+        <button type="submit" className={styles.submitButton}>Criar Projeto</button>
       </form>
     </div>
   );

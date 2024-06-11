@@ -31,4 +31,8 @@
   height: auto;
   margin-right: 58rem; /* Espaçamento entre a imagem e o texto */
   justify-content: flex-start; 
+  position:absolute;
+  top: 38px;
+  left: 40px;
+  transform: translate(-50%, -50%);
 }

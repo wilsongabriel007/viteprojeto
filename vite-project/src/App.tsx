@@ -8,28 +8,30 @@ import NewProject from './components/pages/NewProject';
 import Projects from './components/pages/Projects';
 import Footer from './components/pages/Footer';
 import styles from './components/styles/App.module.css';
+import { ProjectProvider } from './components/context/ProjectContext';
 
-const App: React.FC = () => {
+function App() {
   return (
-    <Router>     
-      <div className={styles.container}>
-        <Navbar />  
-        <div className={styles.content}>
-          
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/company" element={<Company />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/newproject" element={<NewProject />} />
-            <Route path="/projects" element={<Projects />} />
-          </Routes>
-          
+    <ProjectProvider>
+    <Router>
+      
+        <div className={styles.app}>
+          <Navbar />
+          <div className={styles.content}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/company" element={<Company />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/newproject" element={<NewProject />} />
+              <Route path="/projects" element={<Projects />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      
     </Router>
+    </ProjectProvider>
   );
-};
+}
 
 export default App;

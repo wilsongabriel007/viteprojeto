@@ -49,18 +49,22 @@
 
   }
   
-  .createProjectButton {
-    margin-top: 20px;
-    padding: 10px 20px;
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 15px 30px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #2f2f2f;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
   }
-  
-  .createProjectButton:hover {
-    background-color: #0056b3;
-  }
-  
