@@ -6,7 +6,6 @@ import styles from '../styles/NewProject.module.css';
 const NewProject: React.FC = () => {
   const projectContext = useContext(ProjectContext);
 
-  // Verifique se o contexto não é undefined
   if (!projectContext) {
     throw new Error('useContext(ProjectContext) must be used within a ProjectProvider');
   }

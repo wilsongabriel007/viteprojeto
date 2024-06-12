@@ -1,73 +1,72 @@
 .newProject {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 20px;
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-    font-size: 2em;
-    color: #343a40;
-  }
-  
-  .form {
-    width: 100%;
-    max-width: 500px;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .formGroup {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #495057;
-  }
-  
-  input, textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 1em;
-    background: #f8f9fa;
-    transition: border-color 0.3s;
-  }
-  
-  input:focus, textarea:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  textarea {
-    resize: vertical;
-    height: 150px;
-  }
-  
-  .submitButton {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.25em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .submitButton:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #343a40;
+}
+
+.form {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #495057;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1em;
+  background: #f8f9fa;
+  transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  height: 150px;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.25em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}

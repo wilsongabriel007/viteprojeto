@@ -1,39 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { ProjectContext } from '../../components/context/ProjectContext';
 import styles from '../styles/Projects.module.css';
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-}
-
 const Projects: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const projectContext = useContext(ProjectContext);
 
-  useEffect(() => {
-    const storedProjects = localStorage.getItem('projects');
-    if (storedProjects) {
-      setProjects(JSON.parse(storedProjects));
-    }
-  }, []);
+  if (!projectContext) {
+    throw new Error('useContext(ProjectContext) must be used within a ProjectProvider');
+  }
+
+  const { projects } = projectContext;
 
   return (
-    <div className={styles.page}>
-      <h1 className={styles.title}>Meus Projetos</h1>
-      <div className={styles.projectsList}>
-        {projects.length === 0 ? (
-          <p className={styles.noProjects}>Nenhum projeto encontrado.</p>
-        ) : (
-          <ul className={styles.projectList}>
-            {projects.map((project) => (
-              <li key={project.id} className={styles.projectItem}>
-                <h2 className={styles.projectTitle}>{project.title}</h2>
-                <p className={styles.projectDescription}>{project.description}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+    <div className={styles.projects}>
+      <h1>Meus Projetos</h1>
+      <ul className={styles.projectList}>
+        {projects.map((project) => (
+          <li key={project.id} className={styles.projectItem}>
+            <h2>{project.name}</h2>
+            <p>{project.description}</p>
+            <p>Orçamento: R${project.budget}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

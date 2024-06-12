@@ -12,9 +12,8 @@ import { ProjectProvider } from './components/context/ProjectContext';
 
 function App() {
   return (
-    <ProjectProvider>
     <Router>
-      
+      <ProjectProvider>
         <div className={styles.app}>
           <Navbar />
           <div className={styles.content}>
@@ -28,9 +27,8 @@ function App() {
           </div>
           <Footer />
         </div>
-      
+      </ProjectProvider>
     </Router>
-    </ProjectProvider>
   );
 }
 
