@@ -6,9 +6,13 @@ import Company from './components/pages/Company';
 import Contact from './components/pages/Contact';
 import NewProject from './components/pages/NewProject';
 import Projects from './components/pages/Projects';
+
+
+
 import Footer from './components/pages/Footer';
 import styles from './components/styles/App.module.css';
 import { ProjectProvider } from './components/context/ProjectContext';
+import AddService from './components/pages/AddService';
 
 function App() {
   return (
@@ -23,6 +27,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/newproject" element={<NewProject />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:projectId/add-service" element={<AddService />} />
             </Routes>
           </div>
           <Footer />

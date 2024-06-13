@@ -7,7 +7,7 @@ const NewProject: React.FC = () => {
   const projectContext = useContext(ProjectContext);
 
   if (!projectContext) {
-    throw new Error('useContext(ProjectContext) must be used within a ProjectProvider');
+    throw new Error('ProjectContext must be used within a ProjectProvider');
   }
 
   const { addProject } = projectContext;
@@ -22,6 +22,7 @@ const NewProject: React.FC = () => {
       name,
       description,
       budget,
+      services: [],
     };
     addProject(newProject);
     setName('');
