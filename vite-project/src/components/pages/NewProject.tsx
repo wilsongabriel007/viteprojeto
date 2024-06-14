@@ -11,9 +11,11 @@ const NewProject: React.FC = () => {
   }
 
   const { addProject } = projectContext;
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [budget, setBudget] = useState(0);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ const NewProject: React.FC = () => {
       services: [],
     };
     addProject(newProject);
+    setSuccessMessage('Projeto criado com sucesso!');
     setName('');
     setDescription('');
     setBudget(0);
@@ -45,8 +48,9 @@ const NewProject: React.FC = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="description">Descrição:</label>
-          <textarea
+          <label htmlFor="description">Descrição do Projeto:</label>
+          <input
+            type="text"
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -54,7 +58,7 @@ const NewProject: React.FC = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="budget">Orçamento:</label>
+          <label htmlFor="budget">Orçamento do Projeto:</label>
           <input
             type="number"
             id="budget"
@@ -63,6 +67,7 @@ const NewProject: React.FC = () => {
             required
           />
         </div>
+        {successMessage && <p className={styles.success}>{successMessage}</p>}
         <button type="submit" className={styles.submitButton}>Criar Projeto</button>
       </form>
     </div>
