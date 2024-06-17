@@ -11,7 +11,7 @@ const AddService: React.FC = () => {
     throw new Error('ProjectContext must be used within a ProjectProvider');
   }
 
-  const { projects, addService } = projectContext;
+  const { projects, addService, removeService } = projectContext;
   const project = projects.find((p) => p.id === Number(projectId));
 
   if (!project) {
@@ -70,6 +70,21 @@ const AddService: React.FC = () => {
         {successMessage && <p className={styles.success}>{successMessage}</p>}
         <button type="submit" className={styles.submitButton}>Adicionar Serviço</button>
       </form>
+
+      <h2>Serviços</h2>
+      <ul className={styles.serviceList}>
+        {project.services.map((service) => (
+          <li key={service.id} className={styles.serviceItem}>
+            {service.name} - R$ {service.cost.toFixed(2)}
+            <button
+              className={styles.deleteButton}
+              onClick={() => removeService(project.id, service.id)}
+            >
+              Excluir
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

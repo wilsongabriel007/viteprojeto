@@ -10,7 +10,7 @@ const Projects: React.FC = () => {
     throw new Error('ProjectContext must be used within a ProjectProvider');
   }
 
-  const { projects } = projectContext;
+  const { projects, removeProject } = projectContext;
 
   return (
     <div className={styles.projects}>
@@ -30,7 +30,15 @@ const Projects: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <Link to={`/projects/${project.id}/add-service`} className={styles.addServiceLink}>Adicionar Serviço</Link>
+            <Link to={`/addservice/${project.id}`} className={styles.addServiceButton}>
+            Adicionar Serviço
+          </Link>
+          <button
+            className={styles.deleteButton}
+            onClick={() => removeProject(project.id)}
+          >
+            Excluir Projeto
+          </button>
           </li>
         ))}
       </ul>

@@ -17,7 +17,9 @@ interface Project {
 interface ProjectContextType {
   projects: Project[];
   addProject: (project: Project) => void;
+  removeProject: (projectId: number) => void;
   addService: (projectId: number, service: Service) => boolean;
+  removeService: (projectId: number, serviceId: number) => void;
 }
 
 export const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
@@ -29,33 +31,42 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
     setProjects([...projects, project]);
   };
 
-  const addService = (projectId: number, service: Service) => {
-    setProjects((prevProjects) => {
-      return prevProjects.map((project) => {
-        if (project.id === projectId) {
-          if (project.budget < service.cost) {
-            return project; // Não altera o projeto se o custo do serviço for maior que o orçamento
-          }
-          const updatedBudget = project.budget - service.cost;
-          return {
-            ...project,
-            services: [...project.services, service],
-            budget: updatedBudget,
-          };
+  const removeProject = (projectId: number) => {
+    setProjects(projects.filter(project => project.id !== projectId));
+  };
+
+  const addService = (projectId: number, service: Service): boolean => {
+    const updatedProjects = projects.map(project => {
+      if (project.id === projectId) {
+        const totalCost = project.services.reduce((acc, svc) => acc + svc.cost, 0) + service.cost;
+        if (totalCost > project.budget) {
+          return project;
         }
-        return project;
-      });
+        return { ...project, services: [...project.services, service] };
+      }
+      return project;
     });
 
-    const project = projects.find((p) => p.id === projectId);
-    if (project && project.budget >= service.cost) {
-      return true; // Serviço adicionado com sucesso
+    if (updatedProjects === projects) {
+      return false;
     }
-    return false; // Falha ao adicionar serviço
+
+    setProjects(updatedProjects);
+    return true;
+  };
+
+  const removeService = (projectId: number, serviceId: number) => {
+    setProjects(
+      projects.map(project =>
+        project.id === projectId
+          ? { ...project, services: project.services.filter(service => service.id !== serviceId) }
+          : project
+      )
+    );
   };
 
   return (
-    <ProjectContext.Provider value={{ projects, addProject, addService }}>
+    <ProjectContext.Provider value={{ projects, addProject, removeProject, addService, removeService }}>
       {children}
     </ProjectContext.Provider>
   );
