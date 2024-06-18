@@ -1,5 +1,6 @@
 import React, { createContext, useState, ReactNode } from 'react';
 
+
 interface Service {
   id: number;
   name: string;
@@ -11,6 +12,7 @@ interface Project {
   name: string;
   description: string;
   budget: number;
+  remainingBudget: number;
   services: Service[];
 }
 
@@ -28,7 +30,7 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [projects, setProjects] = useState<Project[]>([]);
 
   const addProject = (project: Project) => {
-    setProjects([...projects, project]);
+    setProjects([...projects, { ...project, remainingBudget: project.budget, services: [] }]);
   };
 
   const removeProject = (projectId: number) => {
@@ -42,7 +44,11 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
         if (totalCost > project.budget) {
           return project;
         }
-        return { ...project, services: [...project.services, service] };
+        return { 
+          ...project, 
+          services: [...project.services, service], 
+          remainingBudget: project.budget - totalCost 
+        };
       }
       return project;
     });
@@ -54,16 +60,25 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
     setProjects(updatedProjects);
     return true;
   };
+  
 
   const removeService = (projectId: number, serviceId: number) => {
     setProjects(
-      projects.map(project =>
-        project.id === projectId
-          ? { ...project, services: project.services.filter(service => service.id !== serviceId) }
-          : project
-      )
+      projects.map(project => {
+        if (project.id === projectId) {
+          const updatedServices = project.services.filter(service => service.id !== serviceId);
+          const totalCost = updatedServices.reduce((acc, svc) => acc + svc.cost, 0);
+          return { 
+            ...project, 
+            services: updatedServices, 
+            remainingBudget: project.budget - totalCost 
+          };
+        }
+        return project;
+      })
     );
   };
+  
 
   return (
     <ProjectContext.Provider value={{ projects, addProject, removeProject, addService, removeService }}>
