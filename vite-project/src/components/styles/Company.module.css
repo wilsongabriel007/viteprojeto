@@ -1,0 +1,29 @@
+.companyContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .companyContainer h1,
+  .companyContainer h2 {
+    color: #333;
+  }
+  
+  .companyContainer p {
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .companyContainer ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555;
+  }
+  
+  .companyContainer ul li {
+    margin-bottom: 10px;
+  }
+  

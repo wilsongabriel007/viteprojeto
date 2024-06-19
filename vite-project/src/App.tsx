@@ -26,7 +26,7 @@ function App() {
 
   const handleLogin = () => {
     setIsAuthenticated(true);
-    localStorage.setItem('loggedInUser', 'true'); // Armazene apenas a informação de que o usuário está logado
+    localStorage.setItem('loggedInUser', 'true');
   };
 
   const handleLogout = () => {
