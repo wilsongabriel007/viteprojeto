@@ -1,5 +1,10 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import { saveToLocalStorage, loadFromLocalStorage } from '../../../src/LocalStorage';
+import React, { createContext, useState, ReactNode } from 'react';
+
+interface Service {
+  id: number;
+  name: string;
+  cost: number;
+}
 
 interface Project {
   id: number;
@@ -7,61 +12,73 @@ interface Project {
   description: string;
   budget: number;
   remainingBudget: number;
-  services: any[];
+  services: Service[];
 }
 
 interface ProjectContextType {
   projects: Project[];
   addProject: (project: Project) => void;
   removeProject: (projectId: number) => void;
+  addService: (projectId: number, service: Service) => boolean;
   removeService: (projectId: number, serviceId: number) => void;
 }
 
 export const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
-export const ProjectProvider = ({ children }: { children: ReactNode }) => {
+export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const loggedInUser = localStorage.getItem('loggedInUser');
-
-  useEffect(() => {
-    if (loggedInUser) {
-      const savedProjects = loadFromLocalStorage(`projects_${loggedInUser}`);
-      if (savedProjects) {
-        setProjects(savedProjects);
-      }
-    }
-  }, [loggedInUser]);
-
-  useEffect(() => {
-    if (loggedInUser) {
-      saveToLocalStorage(`projects_${loggedInUser}`, projects);
-    }
-  }, [projects, loggedInUser]);
 
   const addProject = (project: Project) => {
-    setProjects(prevProjects => [...prevProjects, project]);
+    setProjects([...projects, { ...project, remainingBudget: project.budget, services: [] }]);
   };
 
   const removeProject = (projectId: number) => {
-    setProjects(prevProjects => prevProjects.filter(project => project.id !== projectId));
+    setProjects(projects.filter(project => project.id !== projectId));
+  };
+
+  const addService = (projectId: number, service: Service): boolean => {
+    const updatedProjects = projects.map(project => {
+      if (project.id === projectId) {
+        const totalCost = project.services.reduce((acc, svc) => acc + svc.cost, 0) + service.cost;
+        if (totalCost > project.budget) {
+          return project;
+        }
+        return { 
+          ...project, 
+          services: [...project.services, service], 
+          remainingBudget: project.budget - totalCost 
+        };
+      }
+      return project;
+    });
+
+    if (updatedProjects === projects) {
+      return false;
+    }
+
+    setProjects(updatedProjects);
+    return true;
   };
 
   const removeService = (projectId: number, serviceId: number) => {
-    setProjects(prevProjects =>
-      prevProjects.map(project =>
-        project.id === projectId
-          ? {
-              ...project,
-              services: project.services.filter(service => service.id !== serviceId),
-              remainingBudget: project.remainingBudget + project.services.find(service => service.id === serviceId)!.cost,
-            }
-          : project
-      )
+    setProjects(
+      projects.map(project => {
+        if (project.id === projectId) {
+          const updatedServices = project.services.filter(service => service.id !== serviceId);
+          const totalCost = updatedServices.reduce((acc, svc) => acc + svc.cost, 0);
+          return { 
+            ...project, 
+            services: updatedServices, 
+            remainingBudget: project.budget - totalCost 
+          };
+        }
+        return project;
+      })
     );
   };
 
   return (
-    <ProjectContext.Provider value={{ projects, addProject, removeProject, removeService }}>
+    <ProjectContext.Provider value={{ projects, addProject, removeProject, addService, removeService }}>
       {children}
     </ProjectContext.Provider>
   );

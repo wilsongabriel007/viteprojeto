@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ProjectContext } from '../../components/context/ProjectContext';
+import { ProjectContext } from '../context/ProjectContext';
 import styles from '../styles/Projects.module.css';
 
 const Projects: React.FC = () => {

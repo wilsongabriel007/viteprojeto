@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { useParams, useNavigate  } from 'react-router-dom';
-import { ProjectContext } from '../../components/context/ProjectContext';
+import { useParams } from 'react-router-dom';
+import { ProjectContext } from '../context/ProjectContext';
 import styles from '../styles/AddService.module.css';
 
 const AddService: React.FC = () => {
