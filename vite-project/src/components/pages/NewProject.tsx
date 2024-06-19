@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { ProjectContext } from '../../components/context/ProjectContext';
 import styles from '../styles/NewProject.module.css';
-
+import { useNavigate } from 'react-router-dom';
 
 const NewProject: React.FC = () => {
   const projectContext = useContext(ProjectContext);
+  const navigate = useNavigate();
 
   if (!projectContext) {
     throw new Error('ProjectContext must be used within a ProjectProvider');
@@ -24,6 +25,7 @@ const NewProject: React.FC = () => {
       name,
       description,
       budget,
+      remainingBudget: budget,
       services: [],
     };
     addProject(newProject);
@@ -31,6 +33,7 @@ const NewProject: React.FC = () => {
     setName('');
     setDescription('');
     setBudget(0);
+    navigate('/projects'); // Redirecionar para a página de projetos
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
@@ -14,7 +14,6 @@ import { ProjectProvider } from './components/context/ProjectContext';
 import AddService from './components/pages/AddService';
 import ForgotPassword from './components/pages/ForgotPassword';
 
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -27,18 +26,19 @@ function App() {
 
   const handleLogin = () => {
     setIsAuthenticated(true);
+    localStorage.setItem('loggedInUser', 'true'); // Armazene apenas a informação de que o usuário está logado
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('loggedInUser');
-  }
+  };
 
   return (
     <Router>
       <ProjectProvider>
         <div className={styles.app}>
-          <Navbar />
+          <Navbar onLogout={handleLogout} />
           <div className={styles.content}>
             <Routes>
               <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />

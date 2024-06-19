@@ -7,21 +7,21 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleLogin = () => {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((user: any) => user.email === email && user.password === password);
+    const user = users.find((user: any) => user.username === username && user.password === password);
 
     if (user) {
       localStorage.setItem('loggedInUser', JSON.stringify(user));
       onLogin();
       navigate('/');
     } else {
-      setError('Invalid email or password.');
+      setError('Invalid username or password.');
     }
   };
 
@@ -30,12 +30,12 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       <h2>Login</h2>
       {error && <div className={styles.error}>{error}</div>}
       <div className={styles.formGroup}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="username">Username</label>
         <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          id="username"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className={styles.input}
         />
       </div>
